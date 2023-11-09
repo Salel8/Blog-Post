@@ -7,12 +7,15 @@ function addUser(array $input) {
 	$password = null;
     
 	if (!empty($input['email']) && !empty($input['password'])) {
-		if (filter_var($email_a, FILTER_VALIDATE_EMAIL)) {
+		if (filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
 			if(!preg_match("/^[a-zA-Z0-9-!,.;:+=_*^$' ]/",$input['password'])){
+				$passwordErr = "Only letters, numbers, white space and special character allowed";
+			}
+			else{
 				$email = $input['email'];
     			//$password = $input['password'];
 				$password = password_hash($input['password'], PASSWORD_DEFAULT);
-				
+
 				$loginRepository = new LoginRepository();
     			$success = $loginRepository->createUser($email, $password);
     			if (!$success) {

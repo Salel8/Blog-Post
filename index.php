@@ -5,6 +5,8 @@ require('controllers/posts.php');
 require('controllers/comments.php');
 require('controllers/register.php');
 
+require('data/db.php');
+
 
 if (isset($_GET['action']) && $_GET['action'] !== '') {
     if ($_GET['action'] === 'login') {

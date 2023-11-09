@@ -8,7 +8,7 @@ class LoginRepository
     public function dbConnect()
 	{
     	if ($this->database === null) {
-        	$this->database = new PDO('mysql:host=localhost;dbname=blog_posts;charset=utf8', 'root', 'root');
+        	$this->database = new PDO(DB::$host_name.DB::$db_name.DB::$charset, DB::$identifiant, DB::$password);
     	}
 	}
 
@@ -27,7 +27,7 @@ class LoginRepository
 
 	public function login(string $email, string $password)
 	{
-    	$this->dbConnect();
+    	/*$this->dbConnect();
         $sqlQuery = 'SELECT * FROM users';
     	$statement = $this->database->prepare($sqlQuery);
     	$statement->execute();
@@ -51,6 +51,31 @@ class LoginRepository
                     $password
                 );
             }
+        }*/
+
+        $this->dbConnect();
+        $statement = $this->database->prepare(
+        "SELECT email, password, statut FROM users WHERE email = ?"
+        );
+        $statement->execute([$email]);
+        $user = $statement->fetch();
+
+        $loggedUser = null;
+
+        if (
+            $user['email'] === $email &&
+            //$user['password'] === $password
+            password_verify($password, $user['password'])
+        ) {
+            $loggedUser = [
+                'email' => $user['email'],
+                'statut' => $user['statut'],
+            ];
+        } else {
+            $errorMessage = sprintf('Les informations envoyées ne permettent pas de vous identifier : (%s/%s)',
+                $email,
+                $password
+            );
         }
 
     	return $loggedUser;
