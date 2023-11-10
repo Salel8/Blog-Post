@@ -44,7 +44,15 @@ Cette configuration étant établie, vous pouvez dorénavant profiter pleinement
 # Démarrage
 
 Pour lancer le projet, lancer le serveur PHP puis ouvrez votre navigateur web et aller sur la page http://localhost:8888/blog/index.php
-Si ça ne fonctionne pas, modifiez le numéro du port par celui qui est référencé dans votre application php par défaut (ici le numéro est 8888)
+Si ça ne fonctionne pas, modifiez le numéro du port par celui qui est référencé dans votre application php par défaut (ici le numéro est 8888).
+
+Si vous avez importé le jeu de données, deux utilisateurs sont déjà enregistrés. Voici leurs identifiants (email / mot de passe) :
+
+sam-77@hotmail.fr / dragon
+
+user@hotmail.fr / password
+
+Le premier possède un statut administrateur et le second possède un statut user.
 
 # Fabriqué avec
 
