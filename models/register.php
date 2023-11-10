@@ -63,8 +63,8 @@ class LoginRepository
         $loggedUser = null;
 
         if (
-            $user['email'] === $email &&
-            //$user['password'] === $password
+            isset($user) &&
+            $user != null &&
             password_verify($password, $user['password'])
         ) {
             $loggedUser = [
@@ -72,10 +72,11 @@ class LoginRepository
                 'statut' => $user['statut'],
             ];
         } else {
-            $errorMessage = sprintf('Les informations envoyées ne permettent pas de vous identifier : (%s/%s)',
+            /*$errorMessage = sprintf('Les informations envoyées ne permettent pas de vous identifier : (%s/%s)',
                 $email,
                 $password
-            );
+            );*/
+            //$errorMessage = sprintf("Les informations envoyées ne permettent pas de vous identifier. L'email ou le mot de passe est incorrect.");
         }
 
     	return $loggedUser;
