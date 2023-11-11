@@ -55,7 +55,10 @@ function logIn(array $input) {
 						$loginRepository = new LoginRepository();
 						$loggedUser = $loginRepository->login($email, $password);
 						if (!$loggedUser || $loggedUser==null) {
-							die('Impossible de se connecter !');
+							//die("Impossible de se connecter ! L'email ou le mot de passe est incorrect.");
+							$errorMessage = sprintf("Les informations envoyées ne permettent pas de vous identifier. L'email ou le mot de passe est incorrect.");
+							$token_login = uniqid(rand(), true);
+							$_SESSION['token_login'] = $token_login;
 						} else {
 							$_SESSION['loggedUser'] = $loggedUser['email'];
 							$_SESSION['statut'] = $loggedUser['statut'];
